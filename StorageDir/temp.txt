@@ -1,0 +1,22 @@
+player.getCapability(PlayerThirstProvider.PLAYER_THIRST).ifPresent(thirst -> {
+                    thirst.addThirst(1);
+                    player.sendSystemMessage(Component.literal("Current Thirst " + thirst.getThirst())
+                            .withStyle(ChatFormatting.AQUA));
+
+
+
+            player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(mana -> {
+                player.sendSystemMessage(Component.literal("Player Cap opened ")
+                        .withStyle(ChatFormatting.AQUA));
+                //check if mana is present
+                if(mana.getMana() > 0) {
+                    mana.subMana(1);
+                    player.sendSystemMessage(Component.translatable(MESSAGE_MANA_USE).withStyle(ChatFormatting.DARK_AQUA));
+                    player.sendSystemMessage(Component.literal("Current Mana " + mana.getMana())
+                            .withStyle(ChatFormatting.AQUA));
+                }else {
+                    player.sendSystemMessage(Component.translatable(MESSAGE_NO_MANA).withStyle(ChatFormatting.DARK_RED));
+                    player.sendSystemMessage(Component.literal("Current Mana " + mana.getMana())
+                            .withStyle(ChatFormatting.RED));
+                }
+            });
