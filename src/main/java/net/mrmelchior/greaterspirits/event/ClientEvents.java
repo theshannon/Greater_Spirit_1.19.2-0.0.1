@@ -12,7 +12,6 @@ import net.mrmelchior.greaterspirits.GreaterSpirits;
 import net.mrmelchior.greaterspirits.client.ThirstHudOverlay;
 import net.mrmelchior.greaterspirits.networking.ModMessages;
 import net.mrmelchior.greaterspirits.networking.packet.DrinkWaterC2SPacket;
-//import net.mrmelchior.greaterspirits.networking.packet.ManaUseC2SPacket;
 import net.mrmelchior.greaterspirits.networking.packet.ManaUseC2SPacket;
 import net.mrmelchior.greaterspirits.util.KeyBinding;
 
