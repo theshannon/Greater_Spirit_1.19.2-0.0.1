@@ -26,7 +26,9 @@ public class ModEvents {
         if(event.getObject() instanceof Player) {
             if(!event.getObject().getCapability(PlayerThirstProvider.PLAYER_THIRST).isPresent()) {
                 event.addCapability(new ResourceLocation(GreaterSpirits.MOD_ID, "properties"), new PlayerThirstProvider());
-            }
+            } //else if (!event.getObject().getCapability(PlayerThirstProvider.PLAYER_MANA).isPresent()) {
+                //event.addCapability(new ResourceLocation(GreaterSpirits.MOD_ID, "properties"), new PlayerManaProvider());
+            //}
         }
     }
     @SubscribeEvent
@@ -57,6 +59,14 @@ public class ModEvents {
                 }
             });
         }
+        /*if(event.side == LogicalSide.SERVER) {
+            event.player.getCapability(PlayerThirstProvider.PLAYER_MANA).ifPresent(thirst -> {
+                if(thirst.getMana() > 0 && event.player.getRandom().nextFloat() < 0.005f) { // Once Every 10 Seconds on Avg
+                    thirst.subMana(1);
+                    ModMessages.sendToPlayer(new ThirstDataSyncS2CPacket(thirst.getMana()), ((ServerPlayer) event.player));
+                }
+            });
+        }*/
     }
     @SubscribeEvent
     public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {

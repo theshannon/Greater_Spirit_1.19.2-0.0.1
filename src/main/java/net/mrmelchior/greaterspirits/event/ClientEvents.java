@@ -1,5 +1,7 @@
 package net.mrmelchior.greaterspirits.event;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -10,6 +12,8 @@ import net.mrmelchior.greaterspirits.GreaterSpirits;
 import net.mrmelchior.greaterspirits.client.ThirstHudOverlay;
 import net.mrmelchior.greaterspirits.networking.ModMessages;
 import net.mrmelchior.greaterspirits.networking.packet.DrinkWaterC2SPacket;
+//import net.mrmelchior.greaterspirits.networking.packet.ManaUseC2SPacket;
+import net.mrmelchior.greaterspirits.networking.packet.ManaUseC2SPacket;
 import net.mrmelchior.greaterspirits.util.KeyBinding;
 
 public class ClientEvents {
@@ -19,6 +23,9 @@ public class ClientEvents {
         public static void onKeyInput(InputEvent.Key event) {
             if(KeyBinding.DRINKING_KEY.consumeClick()) {
                 ModMessages.sendToServer(new DrinkWaterC2SPacket());
+            } else if (KeyBinding.USE_MANA_KEY.consumeClick()) {
+                ModMessages.sendToServer(new ManaUseC2SPacket());
+                //Minecraft.getInstance().player.sendSystemMessage(Component.literal("Pressed Mana Key!"));
             }
         }
     }
@@ -28,6 +35,7 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
             event.register(KeyBinding.DRINKING_KEY);
+            event.register(KeyBinding.USE_MANA_KEY);
         }
         @SubscribeEvent
         public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {

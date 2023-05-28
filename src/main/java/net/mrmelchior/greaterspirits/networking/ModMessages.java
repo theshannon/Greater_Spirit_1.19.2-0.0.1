@@ -9,6 +9,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import net.mrmelchior.greaterspirits.GreaterSpirits;
 import net.mrmelchior.greaterspirits.networking.packet.DrinkWaterC2SPacket;
 import net.mrmelchior.greaterspirits.networking.packet.ExampleC2SPacket;
+import net.mrmelchior.greaterspirits.networking.packet.ManaUseC2SPacket;
 import net.mrmelchior.greaterspirits.networking.packet.ThirstDataSyncS2CPacket;
 
 public class ModMessages {
@@ -46,6 +47,18 @@ public class ModMessages {
                 .encoder(ThirstDataSyncS2CPacket::toBytes)
                 .consumerMainThread(ThirstDataSyncS2CPacket::handle)
                 .add();
+
+        net.messageBuilder(ManaUseC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(ManaUseC2SPacket::new)
+                .encoder(ManaUseC2SPacket::toBytes)
+                .consumerMainThread(ManaUseC2SPacket::handle)
+                .add();
+
+        /*net.messageBuilder(ThirstDataSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(ThirstDataSyncS2CPacket::new)
+                .encoder(ThirstDataSyncS2CPacket::toBytes)
+                .consumerMainThread(ThirstDataSyncS2CPacket::handle)
+                .add();*/
     }
 
     public static <MSG> void sendToServer(MSG message) {

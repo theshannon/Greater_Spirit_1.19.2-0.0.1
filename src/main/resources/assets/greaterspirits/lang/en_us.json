@@ -1,8 +1,11 @@
 {
 
-  "key.category.greaterspirits.tutorial": "Greater Spirit Mod Catogery",
+  "key.category.greaterspirits.greaterspirits": "Greater Spirit Mod Catogery",
   "key.greaterspirits.drink_water": "Drink Water",
+  "key.greaterspirits.use_mana": "Use Mana",
 
   "message.greaterspirits.drink.water": "Drinking Water",
-  "message.greaterspirits.no.water": "No available Water Source!"
+  "message.greaterspirits.no.water": "No available Water Source!",
+  "message.greaterspirits.use.mana": "Using Mana",
+  "message.greaterspirits.no.mana": "No Mana Available"
 }
