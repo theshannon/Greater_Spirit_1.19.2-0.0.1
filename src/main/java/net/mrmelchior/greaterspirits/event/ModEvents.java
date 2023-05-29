@@ -18,6 +18,7 @@ import net.mrmelchior.greaterspirits.GreaterSpirits;
 import net.mrmelchior.greaterspirits.mana.PlayerMana;
 import net.mrmelchior.greaterspirits.mana.PlayerManaProvider;
 import net.mrmelchior.greaterspirits.networking.ModMessages;
+import net.mrmelchior.greaterspirits.networking.packet.ManaDataSyncS2CPacket;
 import net.mrmelchior.greaterspirits.networking.packet.ThirstDataSyncS2CPacket;
 import net.mrmelchior.greaterspirits.thirst.PlayerThirst;
 import net.mrmelchior.greaterspirits.thirst.PlayerThirstProvider;
@@ -76,10 +77,10 @@ public class ModEvents {
                 //event.player.sendSystemMessage(Component.literal("Mana Tick"));
                 if(mana.getMana() < 10 && event.player.getRandom().nextFloat() < 0.005f) { // Once Every 10 Seconds on Avg
                     mana.addMana(1);
-                    event.player.sendSystemMessage(Component.literal("Added Mana"));
+                    /*event.player.sendSystemMessage(Component.literal("Added Mana"));
                     event.player.sendSystemMessage(Component.literal("Current Mana " + mana.getMana())
-                            .withStyle(ChatFormatting.AQUA));
-                    //ModMessages.sendToPlayer(new ManaDataSyncS2CPacket(mana.getMana()), ((ServerPlayer) event.player));
+                            .withStyle(ChatFormatting.AQUA));*/
+                    ModMessages.sendToPlayer(new ManaDataSyncS2CPacket(mana.getMana()), ((ServerPlayer) event.player));
                 } else if (!(mana.getMana() >= 0 && mana.getMana() <= 10)) {
                     mana.resetMana();
                     event.player.sendSystemMessage(Component.literal("Reset Mana"));
@@ -93,6 +94,9 @@ public class ModEvents {
             if(event.getEntity() instanceof ServerPlayer player) {
                 player.getCapability(PlayerThirstProvider.PLAYER_THIRST).ifPresent(thirst -> {
                     ModMessages.sendToPlayer(new ThirstDataSyncS2CPacket(thirst.getThirst()), player);
+                });
+                player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(mana -> {
+                    ModMessages.sendToPlayer(new ManaDataSyncS2CPacket(mana.getMana()), player);
                 });
             }
         }

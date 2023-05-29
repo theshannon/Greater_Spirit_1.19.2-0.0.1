@@ -7,10 +7,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.mrmelchior.greaterspirits.GreaterSpirits;
-import net.mrmelchior.greaterspirits.networking.packet.DrinkWaterC2SPacket;
-import net.mrmelchior.greaterspirits.networking.packet.ExampleC2SPacket;
-import net.mrmelchior.greaterspirits.networking.packet.ManaUseC2SPacket;
-import net.mrmelchior.greaterspirits.networking.packet.ThirstDataSyncS2CPacket;
+import net.mrmelchior.greaterspirits.networking.packet.*;
 
 public class ModMessages {
     private static SimpleChannel INSTANCE;
@@ -29,6 +26,8 @@ public class ModMessages {
                 .simpleChannel();
 
         INSTANCE = net;
+
+        //calling message packets to communicate between server and client
 
         net.messageBuilder(ExampleC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
                 .decoder(ExampleC2SPacket::new)
@@ -54,11 +53,11 @@ public class ModMessages {
                 .consumerMainThread(ManaUseC2SPacket::handle)
                 .add();
 
-        /*net.messageBuilder(ThirstDataSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(ThirstDataSyncS2CPacket::new)
-                .encoder(ThirstDataSyncS2CPacket::toBytes)
-                .consumerMainThread(ThirstDataSyncS2CPacket::handle)
-                .add();*/
+        net.messageBuilder(ManaDataSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(ManaDataSyncS2CPacket::new)
+                .encoder(ManaDataSyncS2CPacket::toBytes)
+                .consumerMainThread(ManaDataSyncS2CPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) {

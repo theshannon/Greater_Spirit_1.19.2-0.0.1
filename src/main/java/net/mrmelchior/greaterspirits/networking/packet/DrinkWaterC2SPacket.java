@@ -45,8 +45,8 @@ public class DrinkWaterC2SPacket {
                 // increase the water level / thirst level of player
                 player.getCapability(PlayerThirstProvider.PLAYER_THIRST).ifPresent(thirst -> {
                     thirst.addThirst(1);
-                    player.sendSystemMessage(Component.literal("Current Thirst " + thirst.getThirst())
-                            .withStyle(ChatFormatting.AQUA));
+                    /*player.sendSystemMessage(Component.literal("Current Thirst " + thirst.getThirst())
+                            .withStyle(ChatFormatting.AQUA));*/
                     ModMessages.sendToPlayer(new ThirstDataSyncS2CPacket(thirst.getThirst()), player);
                 });
                 // Output the current thirst level

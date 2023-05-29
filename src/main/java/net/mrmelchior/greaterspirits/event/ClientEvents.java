@@ -9,6 +9,7 @@ import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.mrmelchior.greaterspirits.GreaterSpirits;
+import net.mrmelchior.greaterspirits.client.ManaHudOverlay;
 import net.mrmelchior.greaterspirits.client.ThirstHudOverlay;
 import net.mrmelchior.greaterspirits.networking.ModMessages;
 import net.mrmelchior.greaterspirits.networking.packet.DrinkWaterC2SPacket;
@@ -24,7 +25,6 @@ public class ClientEvents {
                 ModMessages.sendToServer(new DrinkWaterC2SPacket());
             } else if (KeyBinding.USE_MANA_KEY.consumeClick()) {
                 ModMessages.sendToServer(new ManaUseC2SPacket());
-                //Minecraft.getInstance().player.sendSystemMessage(Component.literal("Pressed Mana Key!"));
             }
         }
     }
@@ -39,6 +39,7 @@ public class ClientEvents {
         @SubscribeEvent
         public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
             event.registerAboveAll("thirst", ThirstHudOverlay.HUD_THIRST);
+            event.registerAboveAll("mana", ManaHudOverlay.HUD_MANA);
         }
     }
 }
