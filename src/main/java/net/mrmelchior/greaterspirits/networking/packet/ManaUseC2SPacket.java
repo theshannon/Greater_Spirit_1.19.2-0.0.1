@@ -1,20 +1,12 @@
 package net.mrmelchior.greaterspirits.networking.packet;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.network.NetworkEvent;
-import net.mrmelchior.greaterspirits.mana.PlayerMana;
+import net.mrmelchior.greaterspirits.firemagic.FireSpells;
 import net.mrmelchior.greaterspirits.mana.PlayerManaProvider;
 import net.mrmelchior.greaterspirits.networking.ModMessages;
-import net.mrmelchior.greaterspirits.thirst.PlayerThirstProvider;
 
 import java.util.function.Supplier;
 
@@ -43,6 +35,7 @@ public class ManaUseC2SPacket {
                     .withStyle(ChatFormatting.AQUA));*/
             player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(mana -> {
                 mana.subMana(1);
+                FireSpells.fireball_1(level,player);
                 /*player.sendSystemMessage(Component.literal("Current Mana " + mana.getMana())
                         .withStyle(ChatFormatting.AQUA));*/
                 //sync up mana property to hud element
