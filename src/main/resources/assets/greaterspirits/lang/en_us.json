@@ -1,8 +1,8 @@
 {
 
   "key.category.greaterspirits.greaterspirits": "Greater Spirit Mod Catogery",
-  "key.greaterspirits.drink_water": "Drink Water",
   "key.greaterspirits.use_mana": "Use Mana",
+  "key.greaterspirits.magic.menu": "Magic Menu",
 
   "key.greaterspirits.manatype.no_mana": "No Mana User",
   "key.greaterspirits.manatype.half_blood": "Half Blood User",
@@ -14,8 +14,6 @@
   "key.greaterspirits.manatype.dark": "Dark User",
 
 
-  "message.greaterspirits.drink.water": "Drinking Water",
-  "message.greaterspirits.no.water": "No available Water Source!",
   "message.greaterspirits.use.mana": "Using Mana",
   "message.greaterspirits.no.mana": "No Mana Available"
 }

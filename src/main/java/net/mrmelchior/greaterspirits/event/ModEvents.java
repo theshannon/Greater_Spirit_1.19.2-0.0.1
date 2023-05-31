@@ -20,9 +20,6 @@ import net.mrmelchior.greaterspirits.manatype.PlayerManaType;
 import net.mrmelchior.greaterspirits.manatype.PlayerManaTypeProvider;
 import net.mrmelchior.greaterspirits.networking.ModMessages;
 import net.mrmelchior.greaterspirits.networking.packet.ManaDataSyncS2CPacket;
-import net.mrmelchior.greaterspirits.networking.packet.ThirstDataSyncS2CPacket;
-import net.mrmelchior.greaterspirits.thirst.PlayerThirst;
-import net.mrmelchior.greaterspirits.thirst.PlayerThirstProvider;
 
 @Mod.EventBusSubscriber(modid = GreaterSpirits.MOD_ID)
 public class ModEvents {
@@ -31,9 +28,7 @@ public class ModEvents {
     public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
         //add first mana/thirst if lacking
         if(event.getObject() instanceof Player) {
-            if(!event.getObject().getCapability(PlayerThirstProvider.PLAYER_THIRST).isPresent()) {
-                event.addCapability(new ResourceLocation(GreaterSpirits.MOD_ID, "properties"), new PlayerThirstProvider());
-            }
+
             if(!event.getObject().getCapability(PlayerManaProvider.PLAYER_MANA).isPresent()) {
                 event.addCapability(new ResourceLocation(GreaterSpirits.MOD_ID, "manaproperties"), new PlayerManaProvider());
             }
@@ -48,12 +43,6 @@ public class ModEvents {
         //add to this all death persistant tags
         if(event.isWasDeath()) { //|| event.PlayerRespawnEvent.isEndConquered() i want to add
             event.getOriginal().reviveCaps();
-            event.getOriginal().getCapability(PlayerThirstProvider.PLAYER_THIRST).ifPresent(oldStore -> {
-                event.getEntity().getCapability(PlayerThirstProvider.PLAYER_THIRST).ifPresent(newStore -> {
-                    newStore.copyFrom(oldStore);
-                    event.getOriginal().invalidateCaps();
-                });
-            });
             event.getOriginal().getCapability(PlayerManaTypeProvider.PLAYER_MANA_TYPE).ifPresent(oldStore -> {
                 event.getEntity().getCapability(PlayerManaTypeProvider.PLAYER_MANA_TYPE).ifPresent(newStore -> {
                     newStore.copyFrom(oldStore);
@@ -66,7 +55,6 @@ public class ModEvents {
     @SubscribeEvent
     public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
         //registering the class
-        event.register(PlayerThirst.class);
         event.register(PlayerMana.class);
         event.register(PlayerManaType.class);
     }
@@ -76,15 +64,8 @@ public class ModEvents {
         //+
 
         if(event.side == LogicalSide.SERVER) {
-            //thirst reduction random tick effect
-            event.player.getCapability(PlayerThirstProvider.PLAYER_THIRST).ifPresent(thirst -> {
-                if(thirst.getThirst() > 0 && event.player.getRandom().nextFloat() < 0.001f) { // Once Every 50 Seconds on Avg
-                    thirst.subThirst(1);
-                    ModMessages.sendToPlayer(new ThirstDataSyncS2CPacket(thirst.getThirst()), ((ServerPlayer) event.player));
-                } else if (!(thirst.getThirst() >= 0 && thirst.getThirst() <= 10)) {
+            //mana increase random tick effect
 
-                }
-            });
             event.player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(mana -> {
                 //event.player.sendSystemMessage(Component.literal("Mana Tick"));
                 if(mana.getMana() < 10 && event.player.getRandom().nextFloat() < 0.005f) { // Once Every 10 Seconds on Avg
@@ -117,9 +98,6 @@ public class ModEvents {
     public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {
         if(!event.getLevel().isClientSide()) {
             if(event.getEntity() instanceof ServerPlayer player) {
-                player.getCapability(PlayerThirstProvider.PLAYER_THIRST).ifPresent(thirst -> {
-                    ModMessages.sendToPlayer(new ThirstDataSyncS2CPacket(thirst.getThirst()), player);
-                });
                 player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(mana -> {
                     ModMessages.sendToPlayer(new ManaDataSyncS2CPacket(mana.getMana()), player);
                 });

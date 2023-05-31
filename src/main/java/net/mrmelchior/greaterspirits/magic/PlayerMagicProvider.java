@@ -1,4 +1,4 @@
-package net.mrmelchior.greaterspirits.thirst;
+package net.mrmelchior.greaterspirits.magic;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -8,26 +8,27 @@ import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
+import net.mrmelchior.greaterspirits.manatype.PlayerManaType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PlayerThirstProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
+public class PlayerMagicProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
 
-    public static Capability<PlayerThirst> PLAYER_THIRST = CapabilityManager.get(new CapabilityToken<PlayerThirst>() { });
+    public static Capability<PlayerManaType> PLAYER_MAGIC = CapabilityManager.get(new CapabilityToken<PlayerManaType>() { });
 
-    private PlayerThirst thirst = null;
-    private final LazyOptional<PlayerThirst> optional = LazyOptional.of(this::createPlayerThirst);
+    private PlayerManaType magic = null;
+    private final LazyOptional<PlayerManaType> optional = LazyOptional.of(this::createPlayerManaType);
 
-    private PlayerThirst createPlayerThirst() {
-        if(this.thirst == null) {
-            this.thirst = new PlayerThirst();
+    private PlayerManaType createPlayerManaType() {
+        if(this.magic == null) {
+            this.magic = new PlayerManaType();
         }
-        return this.thirst;
+        return this.magic;
     }
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == PLAYER_THIRST) {
+        if (cap == PLAYER_MAGIC) {
             return optional.cast();
         }
         return LazyOptional.empty();
@@ -36,12 +37,12 @@ public class PlayerThirstProvider implements ICapabilityProvider, INBTSerializab
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
-        createPlayerThirst().saveNBTData(nbt);
+        createPlayerManaType().saveNBTData(nbt);
         return nbt;
     }
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
-        createPlayerThirst().loadNBTData(nbt);
+        createPlayerManaType().loadNBTData(nbt);
     }
 }

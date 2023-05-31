@@ -1,12 +1,9 @@
 package net.mrmelchior.greaterspirits.networking.packet;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
-import net.mrmelchior.greaterspirits.manatype.PlayerManaTypeProvider;
 
 import java.util.function.Supplier;
 
@@ -29,13 +26,13 @@ public class ManaTypeC2SPacket {
             //HERE ON SERVER!
             ServerPlayer player = context.getSender();
             ServerLevel level = player.getLevel();
-            player.getCapability(PlayerManaTypeProvider.PLAYER_MANA_TYPE).ifPresent(manaType -> {
+            /*player.getCapability(PlayerManaTypeProvider.PLAYER_MANA_TYPE).ifPresent(manaType -> {
                 player.sendSystemMessage(Component.literal("Function opened ")
                         .withStyle(ChatFormatting.AQUA));
                 manaType.randManaType();
                 player.sendSystemMessage(Component.literal("Type " + manaType.getManaType())
                         .withStyle(ChatFormatting.AQUA));
-            });
+            });*/
         });
         return true;
     }
