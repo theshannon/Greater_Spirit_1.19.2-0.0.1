@@ -4,6 +4,16 @@
   "key.greaterspirits.drink_water": "Drink Water",
   "key.greaterspirits.use_mana": "Use Mana",
 
+  "key.greaterspirits.manatype.no_mana": "No Mana User",
+  "key.greaterspirits.manatype.half_blood": "Half Blood User",
+  "key.greaterspirits.manatype.earth": "Earth User",
+  "key.greaterspirits.manatype.fire": "Fire User",
+  "key.greaterspirits.manatype.water": "Water User",
+  "key.greaterspirits.manatype.air": "Air User",
+  "key.greaterspirits.manatype.light": "Light User",
+  "key.greaterspirits.manatype.dark": "Dark User",
+
+
   "message.greaterspirits.drink.water": "Drinking Water",
   "message.greaterspirits.no.water": "No available Water Source!",
   "message.greaterspirits.use.mana": "Using Mana",

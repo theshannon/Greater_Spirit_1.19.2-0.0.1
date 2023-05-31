@@ -4,7 +4,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
-import net.mrmelchior.greaterspirits.firemagic.FireSpells;
+import net.mrmelchior.greaterspirits.firemagic.spells.FireBall_1;
 import net.mrmelchior.greaterspirits.mana.PlayerManaProvider;
 import net.mrmelchior.greaterspirits.networking.ModMessages;
 
@@ -35,7 +35,7 @@ public class ManaUseC2SPacket {
                     .withStyle(ChatFormatting.AQUA));*/
             player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(mana -> {
                 mana.subMana(1);
-                FireSpells.fireball_1(level,player);
+                FireBall_1.fireball_1(level,player);
                 /*player.sendSystemMessage(Component.literal("Current Mana " + mana.getMana())
                         .withStyle(ChatFormatting.AQUA));*/
                 //sync up mana property to hud element

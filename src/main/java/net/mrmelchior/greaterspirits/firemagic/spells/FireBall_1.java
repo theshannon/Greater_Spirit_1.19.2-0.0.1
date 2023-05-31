@@ -1,4 +1,4 @@
-package net.mrmelchior.greaterspirits.firemagic;
+package net.mrmelchior.greaterspirits.firemagic.spells;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -7,7 +7,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
-public class FireSpells {
+public class FireBall_1 {
 
     //fireball small
     public static void fireball_1(ServerLevel level, Player player){
