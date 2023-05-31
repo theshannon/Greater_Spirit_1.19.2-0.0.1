@@ -1,7 +1,5 @@
 package net.mrmelchior.greaterspirits.event;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -13,6 +11,7 @@ import net.mrmelchior.greaterspirits.client.ManaHudOverlay;
 import net.mrmelchior.greaterspirits.client.ThirstHudOverlay;
 import net.mrmelchior.greaterspirits.networking.ModMessages;
 import net.mrmelchior.greaterspirits.networking.packet.DrinkWaterC2SPacket;
+import net.mrmelchior.greaterspirits.networking.packet.ManaTypeC2SPacket;
 import net.mrmelchior.greaterspirits.networking.packet.ManaUseC2SPacket;
 import net.mrmelchior.greaterspirits.util.KeyBinding;
 
@@ -25,6 +24,7 @@ public class ClientEvents {
                 ModMessages.sendToServer(new DrinkWaterC2SPacket());
             } else if (KeyBinding.USE_MANA_KEY.consumeClick()) {
                 ModMessages.sendToServer(new ManaUseC2SPacket());
+                ModMessages.sendToServer(new ManaTypeC2SPacket());
             }
         }
     }
