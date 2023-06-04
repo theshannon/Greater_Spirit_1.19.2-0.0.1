@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "greaterspirits:block/all_magic_block"
+  }
+}

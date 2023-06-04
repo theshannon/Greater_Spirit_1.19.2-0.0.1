@@ -41,6 +41,7 @@ public class ManaUseC2SPacket {
                     if(mana.getMana() > 0 && manaType.getManaType() == 3) {
                         mana.subMana(1);
                         FireBall_1.fireball_1(level, player);
+
                     }else {
                         player.sendSystemMessage(Component.translatable(MESSAGE_NO_MANA)
                                 .withStyle(ChatFormatting.RED));

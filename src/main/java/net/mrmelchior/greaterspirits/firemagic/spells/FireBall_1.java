@@ -9,6 +9,8 @@ import net.minecraft.world.phys.Vec3;
 
 public class FireBall_1 {
 
+    private static String FIREBALL_1 = "key.greaterspirits.firemagic.Spells.fireball_1";
+
     //fireball small
     public static void fireball_1(ServerLevel level, Player player){
         String playerdir = player.getDirection().getName();
@@ -48,5 +50,9 @@ public class FireBall_1 {
         //player.sendSystemMessage(Component.literal(x + playerdir + z ));
         EntityType.FIREBALL.spawn(level, null,null, blockpos,
                 MobSpawnType.COMMAND, true, false);
+    }
+
+    public String toString(){
+        return FIREBALL_1;
     }
 }

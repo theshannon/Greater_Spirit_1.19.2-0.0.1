@@ -4,6 +4,12 @@
   "key.greaterspirits.use_mana": "Use Mana",
   "key.greaterspirits.magic.menu": "Magic Menu",
 
+  "block.greaterspirits.all_magic_block": "All Magic Block",
+  "block.greaterspirits.gem_infusing_station": "Gem Infusing Station",
+
+
+  "item.greaterspirits.blood_drop": "Blood Drop",
+
   "key.greaterspirits.manatype.no_mana": "No Mana User",
   "key.greaterspirits.manatype.half_blood": "Half Blood User",
   "key.greaterspirits.manatype.earth": "Earth User",
@@ -13,6 +19,9 @@
   "key.greaterspirits.manatype.light": "Light User",
   "key.greaterspirits.manatype.dark": "Dark User",
 
+  "key.greaterspirits.firemagic.spells.fireball_1": "Fire Ball Small",
+
+  "message.greaterspirits.title.desc": "Select Spell",
 
   "message.greaterspirits.use.mana": "Using Mana",
   "message.greaterspirits.no.mana": "No Mana Available"
